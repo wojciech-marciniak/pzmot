@@ -1,0 +1,45 @@
+FORMAT: 1A
+HOST: https://assistance.pzm.pl
+
+# Klub SOS PZMOT
+Dane członkowskie Klubu SOS PZMOT
+
+# Zapytania o dane
+
+## Dane członkowskie [/find/{cardNumber}]
+A coupon contains information about a percent-off or amount-off discount you
+might want to apply to a customer.
+
++ Parameters
+    + cardNumber (number, required)
+        ośmiocyfrowy numer karty członkowskiej
+
+### Pobierz dane [GET]
+Pobiera dane (w tym dane o uprawnieniach członka o danym numerze karty.
+
++ Response 200 (application/json)
+    + Attributes
+        + response (Response)
+
+# Data Structures
+
+## Response (object)
++ status: OK (enum[string])
+    + Members
+        + OK - wszystko w porządku
+        + AUTHORIZATION_FAILED - brak autoryzacji, zapytanie spoza firmy
+        + NOT_FOUND - nie znaleziono osoby
++ member (Member)
+
+## Member (object)
++ cardNumber: 12345678 (number) - numer karty
++ firstName: Jan (string) - imię
++ lastName: Kowalski (string) - nazwisko
++ policies (AllPolicies) - wszystkie polisy
+
+## Policy (object)
++ policyNumber: WKN7665765 (string) - numer polisy
+
+## AllPolicies (object)
++ valid (array[Policy]) - ważne polisy
++ invalid (array[Policy]) - nieważne polisy
